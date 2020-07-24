@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Employee Management System</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<h1>Employee Management System</h1>
+		<hr>
+		<h2>Save Employee</h2>
+
+		<form action="#" th:action="@{/saveEmployee}" th:object="${employee}"
+			method="POST">
+			<input type="text" th:field="*{userName}"
+			placeholder="Employee User Name" class="form-control mb-4 col-4">
+			<div class="alert alert-danger mb-4 col-4" role="alert" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">
+			Age Error
+			</div>
+			<br>
+			
+			<input type="text" th:field="*{firstName}"
+			placeholder="Employee First Name" class="form-control mb-4 col-4">
+			<div class="alert alert-danger mb-4 col-4" role="alert" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Age Error</div>
+			<br>
+			
+			<input type="text" th:field="*{lastName}"
+			placeholder="Employee Last Name" class="form-control mb-4 col-4">
+			<div class="alert alert-danger mb-4 col-4" role="alert" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Age Error</div>
+			<br>
+			
+			<label>Departement Type</label>
+			<select name="dep_id" class="form-control mb-4 col-4">
+			    <option th:each="department: ${departments}" th:value="${department.id}"  th:text="${department.name}" ></option>
+			</select>
+				
+			<input type="text" th:field="*{email}"
+			placeholder="Employee Email" class="form-control mb-4 col-4">
+			<div class="alert alert-danger mb-4 col-4" role="alert" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Age Error</div>
+			<br>
+			
+			<input type="text" th:field="*{phone}"
+			placeholder="Employee phone" class="form-control mb-4 col-4">
+			<div class="alert alert-danger mb-4 col-4" role="alert" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Age Error</div>
+			<br>
+			
+			<label>Remuneration Type</label>
+			<select name="remu_id" class="form-control mb-4 col-4">
+			    <option th:each="remuneration: ${remunerations}" th:value="${remuneration.id}"  th:text="${remuneration.type}" ></option>
+			</select>
+			
+			<input type="number" step="0.5" th:field="*{salery}"
+			placeholder="Employee Salery" class="form-control mb-4 col-4">
+			<div class="alert alert-danger mb-4 col-4" role="alert" th:if="${#fields.hasErrors('salery')}" th:errors="*{salery}">Age Error</div>
+			<br>
+			
+			<input type="text" th:field="*{encrytedPassword}"
+			placeholder="Employee Password" class="form-control mb-4 col-4">
+			<div class="alert alert-danger mb-4 col-4" role="alert" th:if="${#fields.hasErrors('encrytedPassword')}" th:errors="*{encrytedPassword}">Age Error</div>
+			<br>
+			
+			<label>Statut</label>
+			<select th:field="*{enabled}" class="form-control mb-4 col-4">
+			    <option th:value="true" th:text="Enabled"></option>
+			    <option th:value="false" th:text="Disabled"></option>
+			</select>
+			
+			<label th:if="${supperieurs != null and !supperieurs.empty}">superior</label>
+			<select th:if="${supperieurs != null and !supperieurs.empty}" name="sup_id" class="form-control mb-4 col-4">
+			    <option th:each="supperieur: ${supperieurs}" value="null" th:value="${supperieur.userId}" th:text="${supperieur.lastName}" ></option>
+			</select>
+			     
+             <ul class="list-group mb-4 col-4">
+			  <li class="list-group-item" th:each="role : ${roles}">
+			    <input type="checkbox" name="Roles" th:value="${role.roleId}" />
+			    <label th:text="#{${role.roleName}}"></label>
+			  </li>
+			</ul>
+					
+			<button type="submit" class="btn btn-info col-2"> Save Employee</button>
+		</form>
+		
+		<hr>
+		
+		<a th:href = "@{/admin}"> Back to Employee List</a>
+	</div>
+</body>
+</html>

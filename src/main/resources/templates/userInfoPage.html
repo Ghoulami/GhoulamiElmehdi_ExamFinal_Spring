@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <title>User Info</title>
+      <link rel="stylesheet"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+		crossorigin="anonymous">
+   </head>
+   <body>
+   <div class="container">
+      <!-- Include _menu.html -->
+      <th:block th:include="/_menu"></th:block>
+       
+       
+      <h1>Employee Management System</h1>
+		<hr>
+	  <h2>User Info Page</h2>
+      <h3>Welcome : <span th:utext="${#request.userPrincipal.name}"></span></h3>       
+      <br/><br/>
+      
+      <ul class="list-group">
+  		<li class="list-group-item" th:if="${userInfo != null}" th:utext="'User Name : ' + ${emplyee.userName}"></li>
+  	  	<li class="list-group-item" th:if="${userInfo != null}" th:utext="'User Name : ' + ${emplyee.firstName}"></li>
+  	  	<li class="list-group-item" th:if="${userInfo != null}" th:utext="'Last Name : ' + ${emplyee.lastName}"></li>
+  	  	<li class="list-group-item" th:if="${userInfo != null}" th:utext="'Email : ' + ${emplyee.email}"></li>
+  	  	<li class="list-group-item" th:if="${userInfo != null}" th:utext="'Salery : ' + ${emplyee.salery} + ' MAD'"></li>
+  	  	<li class="list-group-item" th:if="${emplyee.supperieur != null}" th:utext="'Seperieur : ' + ${emplyee.supperieur.lastName}"></li>
+  	  	<li class="list-group-item" th:if="${userInfo != null}" th:utext="'Department : ' + ${emplyee.department.name}"></li>
+  	  	<li class="list-group-item" th:if="${userInfo != null}" th:utext="'Roles : ' + ${userInfo}"></li>
+  	  	<br>
+  	  	<a th:href="@{/showFormForUpdate/{id}(id=${emplyee.userId})}" class="btn btn-primary">Update my profile</a>
+  	  </ul>
+  
+     </div>
+   </body>
+    
+</html>
